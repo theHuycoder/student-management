@@ -41,10 +41,9 @@ addButton.addEventListener("click", (e) => {
     let nameValue = studentName.value;
     let birthdayValue = studentBirthday.value;
     let classValue = studentClass.value;
-    let mark1 = studentMark1.value;
-    let mark2 = studentMark2.value;
-    let mark3 = studentMark3.value;
-    console.log(validateForm(nameValue, birthdayValue, classValue));
+    let mark1 = parseFloat(studentMark1.value);
+    let mark2 = parseFloat(studentMark2.value);
+    let mark3 = parseFloat(studentMark3.value);
     if (validateForm(nameValue, birthdayValue, classValue)) {
         id += 1;
         let newStudent = {
@@ -75,13 +74,22 @@ calculateAverageButton.addEventListener("click",()=>{
     for (let i = 0; i < studentList.length;i++){
         let currentStudent = studentList[i];
         const {mark1,mark2,mark3} = currentStudent;
-        let averageMark = calculateAverage(mark1,mark2,mark3);
+        let averageMark = calculateAverage([mark1,mark2,mark3]);
         currentStudent.averageMark = averageMark;
     }
     let myJSON = JSON.stringify(studentList);
     localStorage.setItem("studentList", myJSON);
     const allTableRows = document.querySelectorAll("#table-body tr");
-
+    for (let i=0;i< studentList.length;i++){
+        const {averageMark} = studentList[i];
+        let cellListInRow = allTableRows[i].children;
+        console.log(cellListInRow.length);
+        if (cellListInRow.length === 7){
+            let cell = document.createElement("td");
+            cell.innerHTML = averageMark;
+            allTableRows[i].appendChild(cell);
+        }
+    }
 
 
 })
@@ -130,7 +138,7 @@ function calculateAverage(markArr) {
     for (let i=0; i < markArr.length;i++){
         sum+= markArr[i];
     }
-    return (sum/markArr.length).toFixed(2);
+    return (sum/(markArr.length)).toFixed(2);
 }
 
 
