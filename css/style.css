@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+#header {
+    text-align: center;
+    margin-top: 2rem;
+}
+.close {
+    color: red;
+    float: none;
+
+}
+aside {
+    border: 1px rgba(0,0,0,0.5) solid;
+    border-radius: 8px;
+}
+table tr td {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+table tr td:nth-child(5),
+table tr td:nth-child(6),
+table tr td:nth-child(7),
+table tr td:nth-child(8){
+    text-align: center;
+}
